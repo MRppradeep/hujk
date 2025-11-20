@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>මගේ ආදරණීය සුභ උපන්දිනයක්!</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Monoton&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Countdown Preloader Styles */
+        #countdown-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f3e7e9; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999; 
+            transition: opacity 1s ease-in-out;
+        }
+
+        #countdown-number {
+            font-size: 10em; /* අංකය තව තවත් ලොකු කළා */
+            color: #ff6b81; 
+            font-family: 'Monoton', cursive; /* 🆕 අලුත් ලස්සන font එක */
+            font-weight: 400;
+            text-shadow: 4px 4px 0px rgba(255, 107, 129, 0.4), 8px 8px 0px rgba(164, 69, 178, 0.3); /* සෙවණැලි added */
+            animation: scaleIn 0.5s ease-out forwards, neonPulse 1s infinite alternate; 
+        }
+
+        /* Countdown Animations */
+        @keyframes scaleIn {
+            0% { transform: scale(0.5); opacity: 0.5; }
+            100% { transform: scale(1.0); opacity: 1; }
+        }
+        
+        @keyframes neonPulse {
+            from { text-shadow: 0 0 5px #ffb8b8, 0 0 10px #ff6b81; }
+            to { text-shadow: 0 0 10px #ff6b81, 0 0 20px #a445b2; }
+        }
+
+        /* Main Content Styling */
+        body {
+            font-family: 'Dancing Script', cursive; 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%); 
+            color: #444;
+            overflow: hidden; 
+            opacity: 0;
+            transition: opacity 1s ease-in-out; 
+        }
+
+        .wish-card {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(255, 107, 129, 0.3); 
+            padding: 50px 35px;
+            max-width: 90%;
+            width: 450px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            transition: all 0.5s ease;
+            animation: fadeIn 2s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        h1 { color: #ff6b81; font-size: 3.5em; margin-bottom: 5px; line-height: 1.1; }
+        h2 { color: #a445b2; font-size: 2.2em; margin-bottom: 30px; animation: pulse 1.5s infinite; }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.03); }
+            100% { transform: scale(1); }
+        }
+
+        p { font-size: 1.3em; line-height: 1.8; margin-bottom: 25px; color: #555; }
+        .signature { margin-top: 40px; font-size: 1.5em; color: #ff6b81; border-top: 2px dashed #ffb8b8; padding-top: 15px; }
+
+        /* Floating Hearts Animation (Unchanged) */
+        .heart { position: absolute; width: 20px; height: 20px; background-color: #ff6b81; transform: rotate(-45deg); z-index: 0; animation: floatUp 15s infinite; opacity: 0; pointer-events: none; }
+        .heart::before, .heart::after { content: ""; position: absolute; width: 20px; height: 20px; background-color: #ff6b81; border-radius: 50%; }
+        .heart::before { left: -50%; }
+        .heart::after { top: -50%; }
+        @keyframes floatUp { 0% { transform: translateY(100vh) rotate(-45deg); opacity: 0; } 5% { opacity: 0.8; } 100% { transform: translateY(-50vh) rotate(-45deg); opacity: 0; } }
+        /* Heart Delays (Unchanged) */
+        .heart:nth-child(2) { left: 10%; width: 15px; height: 15px; animation-duration: 12s; animation-delay: 2s; }
+        .heart:nth-child(3) { left: 25%; width: 25px; height: 25px; background-color: #ffb8b8; animation-duration: 18s; animation-delay: 4s; }
+        .heart:nth-child(4) { left: 40%; width: 18px; height: 18px; animation-duration: 10s; animation-delay: 6s; }
+        .heart:nth-child(5) { left: 55%; width: 30px; height: 30px; background-color: #ffb8b8; animation-duration: 20s; animation-delay: 8s; }
+        .heart:nth-child(6) { left: 70%; width: 22px; height: 22px; animation-duration: 14s; animation-delay: 10s; }
+        .heart:nth-child(7) { left: 85%; width: 16px; height: 16px; background-color: #ffb8b8; animation-duration: 16s; animation-delay: 1s; }
+        .heart:nth-child(8) { left: 5%; width: 28px; height: 28px; animation-duration: 19s; animation-delay: 5s; }
+        .heart:nth-child(9) { left: 95%; width: 19px; height: 19px; animation-duration: 13s; animation-delay: 7s; }
+        .heart:nth-child(10) { left: 35%; width: 24px; height: 24px; animation-duration: 17s; animation-delay: 3s; }
+        
+        /* Music Note (Unchanged) */
+        .music-note {
+            position: fixed;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ffeaa7; 
+            color: #d63031;
+            padding: 8px 15px;
+            border-radius: 10px;
+            font-size: 0.9em;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+            font-family: Arial, sans-serif; 
+        }
+    </style>
+</head>
+<body>
+
+    <div id="countdown-overlay">
+        <span id="countdown-number">5</span>
+    </div>
+    
+    <iframe 
+        width="0" 
+        height="0" 
+        src="https://www.youtube.com/embed/5u4xTa3LR2U?autoplay=1&mute=1&loop=1&playlist=5u4xTa3LR2U" 
+        frameborder="0" 
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+        allowfullscreen
+        style="display: none;">
+    </iframe>
+    
+    <div class="music-note">
+        🎶 Music is playing Muted! Please turn up the volume of your device to hear it.
+    </div>
+
+    <div class="heart" style="left: 20%;"></div>
+    <div class="heart" style="left: 10%;"></div>
+    <div class="heart" style="left: 25%;"></div>
+    <div class="heart" style="left: 40%;"></div>
+    <div class="heart" style="left: 55%;"></div>
+    <div class="heart" style="left: 70%;"></div>
+    <div class="heart" style="left: 85%;"></div>
+    <div class="heart" style="left: 5%;"></div>
+    <div class="heart" style="left: 95%;"></div>
+    <div class="heart" style="left: 35%;"></div>
+    
+    <div class="wish-card">
+        <h1>💕 Happy Birthday My Love! 💕</h1>
+        
+        <h2>[Girlfriend's Name]</h2>
+        
+        <p>
+            ආදරණීය සුභ උපන්දිනයක් මගේ රත්තරන්! 
+            ඔබ මගේ ජීවිතයට ආලෝකයක්. ඔබ මට කොතරම් වැදගත්ද කියා වචන වලින් කියන්න බැහැ.
+        </p>
+        
+        <p>
+            මේ ලෝකේ තියෙන හැම සතුටක්ම, ආදරයක්ම, යහපත් දෙයක්ම මේ උපන්දිනයෙන් පස්සේ ඔබේ ජීවිතයට ගෙන ඒමට මම ප්‍රාර්ථනා කරනවා.
+            මම හැමදාම ඔබට ආදරෙයි.
+        </p>
+
+        <p class="signature">With All My Love,<br>[Your Name]</p>
+    </div>
+
+    <script>
+        const countdownOverlay = document.getElementById('countdown-overlay');
+        const countdownNumber = document.getElementById('countdown-number');
+        let count = 5;
+
+        function startCountdown() {
+            countdownNumber.textContent = count;
+            // Count වෙනකොට animation එක restart කරන්න
+            countdownNumber.style.animation = 'none';
+            countdownNumber.offsetHeight; /* force reflow */
+            countdownNumber.style.animation = ''; 
+            
+            count--;
+
+            if (count >= 0) {
+                setTimeout(startCountdown, 1000);
+            } else {
+                // Countdown අවසන්
+                countdownOverlay.style.opacity = '0';
+                document.body.style.opacity = '1';
+                
+                // Overlay එක ඉවත් කිරීම
+                setTimeout(() => {
+                    countdownOverlay.style.display = 'none';
+                }, 1000); 
+            }
+        }
+        
+        window.onload = startCountdown;
+    </script>
+
+</body>
+</html>
